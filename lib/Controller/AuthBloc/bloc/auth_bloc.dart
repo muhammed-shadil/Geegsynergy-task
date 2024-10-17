@@ -18,44 +18,27 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     final UserController userController = UserController();
     try {
       emit(LoginLoading());
-      UserModel? user =
-          userController.getUser(); // No need to open the box here
-      if (user != null &&
-          user.name == event.name &&
-          user.password == event.password) {
-        emit(LoginSuccess(message: "Successfully login"));
+      UserModel? user = userController.getUser(event.name);
+      if (user != null && user.password == event.password) {
+        emit(LoginSuccess(message: "Successfully logged in"));
       } else {
         emit(LoginFailed(message: "Invalid credentials"));
       }
     } catch (e) {
-      print(e.toString());
       emit(LoginFailed(message: "Failed to login"));
     }
   }
 
   FutureOr<void> signup(SignUpEvent event, Emitter<AuthState> emit) async {
+    final UserController userController = UserController();
     try {
       emit(SignUpLoading());
 
-      final UserController userController = UserController();
-
-      // Check if the user already exists (by email, username, or phone)
-      UserModel? existingUser =
-          userController.getUserByEmail(event.userModel.email);
+      UserModel? existingUser = userController.getUser(event.userModel.name);
       if (existingUser != null) {
-        emit(SignUpFailed(message: "Email already in use"));
+        emit(SignUpFailed(message: "User already exists"));
         return;
       }
-
-      // You can add other checks for username, phone, etc.
-      UserModel? existingUsername =
-          userController.getUserByUsername(event.userModel.name);
-      if (existingUsername != null) {
-        emit(SignUpFailed(message: "Username already taken"));
-        return;
-      }
-
-      // If no user exists with the same credentials, save the new user
       await userController.saveUser(event.userModel);
 
       emit(SignUpSuccess(message: "Successfully signed up"));

@@ -9,7 +9,7 @@ void main()async {
    WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(UserModelAdapter());
-  // await Hive.openBox<UserModel>('userBox');
+  await Hive.openBox<UserModel>('userBox');
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
