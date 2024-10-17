@@ -15,13 +15,13 @@ class SignupScreenWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AuthBloc(),
-      child: SignupScreen(),
+      child: const SignupScreen(),
     );
   }
 }
 
 class SignupScreen extends StatefulWidget {
-  SignupScreen({super.key});
+  const SignupScreen({super.key});
 
   @override
   State<SignupScreen> createState() => _SignupScreenState();
@@ -82,7 +82,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                     ),
                     const Padding(
-                      padding: EdgeInsets.only(top: 30),
+                      padding: EdgeInsets.only(top: 0),
                       child: Text(
                         "Sign up",
                         style: TextStyle(fontSize: 20),
@@ -128,8 +128,8 @@ class _SignupScreenState extends State<SignupScreen> {
                       child: MainTextfield(
                         controller: fullnamecontroller,
                         preicon: Icons.person_3_outlined,
-                        hinttext: "Please enter your full name",
-                        namefield: "Full name",
+                        hinttext: "Please enter your Name",
+                        namefield: "Name",
                         keyboard: TextInputType.name,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -143,12 +143,12 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 40),
+                      padding: const EdgeInsets.only(bottom: 20),
                       child: MainTextfield(
                         controller: phonecontroller,
-                        preicon: Icons.person_search_sharp,
-                        hinttext: "Please enter your phone number",
-                        namefield: "User name",
+                        preicon: Icons.phone_android,
+                        hinttext: "Enter your phone number",
+                        namefield: "Phone number",
                         keyboard: TextInputType.name,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -169,7 +169,8 @@ class _SignupScreenState extends State<SignupScreen> {
                         'Doctor',
                         'Engineer',
                         'Teacher',
-                        'Artist'
+                        'Artist',
+                        'others'
                       ]
                           .map((e) => DropdownMenuItem<String>(
                                 value: e,

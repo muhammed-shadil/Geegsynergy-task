@@ -11,11 +11,11 @@ part 'homedata_state.dart';
 
 class HomedataBloc extends Bloc<HomedataEvent, HomedataState> {
   HomedataBloc() : super(HomedataInitial()) {
-    on<HomedataEvent>(handler);
+    on<Homedatafetch>(datafetching);
   }
   final Apirepository apirepository = Apirepository();
 
-  FutureOr<void> handler(
+  FutureOr<void> datafetching(
       HomedataEvent event, Emitter<HomedataState> emit) async {
     emit(DataLoading());
     try {
@@ -23,8 +23,9 @@ class HomedataBloc extends Bloc<HomedataEvent, HomedataState> {
       final Response response = await apirepository.homedata(data);
       final result = jsonDecode(response.body);
       if (response.statusCode == 200) {
+        print(response.statusCode);
         emit(DataSuccess(
-          message: result['message'],
+          message: "result['message']",
         ));
       } else {
         emit(DataFailed(message: result['message']));
