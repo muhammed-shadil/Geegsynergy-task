@@ -91,13 +91,13 @@ class _HomescreenState extends State<Homescreen> {
                         itemBuilder: (BuildContext context, int index) {
                           return MovieTile(
                               imageUrl:
-                                  "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
-                              title: "title",
-                              genre: "genre",
-                              director: "director",
+                                  "https://m.media-amazon.com/images/I/71OHH9HaB5S.jpg",
+                              title: "kill bad",
+                              genre: "Action",
+                              director: "Wilson",
                               starring: "starring",
-                              views: "views",
-                              releaseDate: "releaseDate");
+                              views: "1M",
+                              releaseDate: "12/12/200");
                         },
                         separatorBuilder: (BuildContext context, int index) =>
                             const Divider(

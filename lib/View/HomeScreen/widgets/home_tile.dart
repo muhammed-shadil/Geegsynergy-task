@@ -29,14 +29,17 @@ class MovieTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           // Movie Poster
-          Image.network(
-            imageUrl,
-            height: 100,
-            width: 60,
-            fit: BoxFit.cover,
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.network(
+              imageUrl,
+              height: 120,
+              width: 80,
+              fit: BoxFit.cover,
+            ),
           ),
           SizedBox(width: 8),
 
@@ -62,7 +65,8 @@ class MovieTile extends StatelessWidget {
                 SizedBox(height: 8),
 
                 // Views, Date, and Votes
-                SingleChildScrollView(scrollDirection: Axis.horizontal,
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -82,6 +86,7 @@ class MovieTile extends StatelessWidget {
                   },
                   child: Text("Watch Trailer"),
                   style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white,
                     backgroundColor: Colors.blue, // Button color
                   ),
                 ),
