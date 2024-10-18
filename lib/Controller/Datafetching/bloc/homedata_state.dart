@@ -8,9 +8,9 @@ final class HomedataInitial extends HomedataState {}
 final class DataLoading extends HomedataState {}
 
 final class DataSuccess extends HomedataState {
-  final String message;
+  final Datafetch data;
 
-  DataSuccess({required this.message});
+  DataSuccess({required this.data});
 }
 
 final class DataFailed extends HomedataState {

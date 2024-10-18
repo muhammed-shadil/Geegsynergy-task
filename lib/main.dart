@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:geeksynergy_mechine_task/Model/user_model.dart';
 import 'package:geeksynergy_mechine_task/Utils/constants.dart';
 import 'package:geeksynergy_mechine_task/View/LoginScreen/login_screen.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 
-void main()async {
-   WidgetsFlutterBinding.ensureInitialized();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(UserModelAdapter());
   await Hive.openBox<UserModel>('userBox');

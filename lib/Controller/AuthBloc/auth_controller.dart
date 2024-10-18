@@ -13,8 +13,7 @@ class UserController {
 
   Future<void> saveUser(UserModel user) async {
     var box = await _getUserBox();
-    // Store the user with their unique identifier (e.g., username or ID)
-    await box.put(user.name, user);  // Assuming 'name' is unique
+    await box.put(user.name, user);
   }
 
   UserModel? getUser(String username) {

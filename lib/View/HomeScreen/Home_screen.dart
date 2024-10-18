@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geeksynergy_mechine_task/Controller/Datafetching/bloc/homedata_bloc.dart';
 import 'package:geeksynergy_mechine_task/View/HomeScreen/widgets/home_tile.dart';
 import 'package:geeksynergy_mechine_task/View/HomeScreen/widgets/shimmer_home.dart';
+import 'package:geeksynergy_mechine_task/View/HomeScreen/widgets/showdialoge.dart';
 
 class HomeScreenWrapper extends StatelessWidget {
   const HomeScreenWrapper({super.key});
@@ -24,14 +25,6 @@ class Homescreen extends StatefulWidget {
 }
 
 class _HomescreenState extends State<Homescreen> {
-  final List<String> filterOptions = [
-    'Trending',
-    'Relationship',
-    'Self Care',
-    'Family'
-  ];
-
-  String selectedFilter = 'Trending';
   @override
   void initState() {
     BlocProvider.of<HomedataBloc>(context).add(Homedatafetch());
@@ -48,9 +41,11 @@ class _HomescreenState extends State<Homescreen> {
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              showCompanyInfoDialog(context);
+            },
             icon: const Icon(
-              Icons.notifications_none,
+              Icons.info_rounded,
               size: 30,
             ),
           )
@@ -72,11 +67,6 @@ class _HomescreenState extends State<Homescreen> {
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
-            // BlocBuilder<HomedataBloc, HomedataState>(
-            //   builder: (context, state) {
-            //     if (state is DataSuccess) {
-            //       print("susssssssssssssssssssssssssssssssss");
-            //       return
             BlocBuilder<HomedataBloc, HomedataState>(
               builder: (context, state) {
                 if (state is DataLoading) {
@@ -87,17 +77,14 @@ class _HomescreenState extends State<Homescreen> {
                     child: RefreshIndicator(
                       onRefresh: refresh,
                       child: ListView.separated(
-                        itemCount: 5,
+                        itemCount: state.data.search.length,
                         itemBuilder: (BuildContext context, int index) {
                           return MovieTile(
-                              imageUrl:
-                                  "https://m.media-amazon.com/images/I/71OHH9HaB5S.jpg",
-                              title: "kill bad",
-                              genre: "Action",
-                              director: "Wilson",
-                              starring: "starring",
-                              views: "1M",
-                              releaseDate: "12/12/200");
+                            imageUrl: state.data.search[index].poster,
+                            title: state.data.search[index].title,
+                            year: state.data.search[index].year,
+                            type: state.data.search[index].type,
+                          );
                         },
                         separatorBuilder: (BuildContext context, int index) =>
                             const Divider(
@@ -110,18 +97,6 @@ class _HomescreenState extends State<Homescreen> {
                 return Container();
               },
             ),
-            // } else if (state is DataLoading) {
-            //   return const ShimmerLoading();
-            // } else if (state is DataFailed) {
-            //   // ScaffoldMessenger.of(context).showSnackBar(
-            //   //   SnackBar(
-            //   //     content: Text(state.message!),
-            //   //   ),
-            // );
-            //   }
-            //   return Container();
-            // },
-            // )
           ],
         ),
       ),

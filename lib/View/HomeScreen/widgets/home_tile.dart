@@ -1,29 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:geeksynergy_mechine_task/Utils/constants.dart';
 
 class MovieTile extends StatelessWidget {
   final String imageUrl;
   final String title;
-  final String genre;
-  final String director;
-  final String starring;
-  final String views;
-  final String releaseDate;
+  final String year;
+  final String type;
 
-  MovieTile({
+  const MovieTile({
+    super.key,
     required this.imageUrl,
     required this.title,
-    required this.genre,
-    required this.director,
-    required this.starring,
-    required this.views,
-    required this.releaseDate,
+    required this.year,
+    required this.type,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(8.0),
-      margin: EdgeInsets.symmetric(vertical: 8.0),
+      padding: const EdgeInsets.all(8.0),
+      margin: const EdgeInsets.symmetric(vertical: 8.0),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey),
         borderRadius: BorderRadius.circular(8.0),
@@ -31,7 +27,6 @@ class MovieTile extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // Movie Poster
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Image.network(
@@ -41,54 +36,29 @@ class MovieTile extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          SizedBox(width: 8),
-
-          // Movie Information
+          const SizedBox(width: 8),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Movie Title
                 Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 4),
-
-                // Genre, Director, Starring
-                Text('Genre: $genre', style: TextStyle(fontSize: 12)),
-                Text('Director: $director', style: TextStyle(fontSize: 12)),
-                Text('Starring: $starring', style: TextStyle(fontSize: 12)),
-                SizedBox(height: 8),
-
-                // Views, Date, and Votes
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('$views views | Voted by 1 People',
-                          style: TextStyle(fontSize: 12)),
-                      Text('Release: $releaseDate',
-                          style: TextStyle(fontSize: 12)),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 8),
-
-                // Watch Trailer Button
+                const SizedBox(height: 4),
+                Text('year: $year', style: const TextStyle(fontSize: 12)),
+                Text('type: $type', style: const TextStyle(fontSize: 12)),
+                const SizedBox(height: 16),
                 ElevatedButton(
-                  onPressed: () {
-                    // Handle trailer button press
-                  },
-                  child: Text("Watch Trailer"),
+                  onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.blue, // Button color
+                    foregroundColor: constants.white,
+                    backgroundColor: constants.secodarycolor,
                   ),
+                  child: const Text("Watch Trailer"),
                 ),
               ],
             ),
